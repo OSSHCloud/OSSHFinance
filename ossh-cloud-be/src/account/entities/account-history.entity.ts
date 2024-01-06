@@ -10,9 +10,12 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-@Entity({ name: 'account' })
-export class Account {
-  @PrimaryGeneratedColumn({ name: 'account_id' })
+@Entity({ name: 'account_history' })
+export class AccountHistory {
+  @PrimaryGeneratedColumn({ name: 'account_history_id' })
+  accountHistoryId: number;
+
+  @Column({ name: 'account_id' })
   accountId: number;
 
   @Column({ name: 'title' })
