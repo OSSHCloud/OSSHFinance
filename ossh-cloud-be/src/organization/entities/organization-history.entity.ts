@@ -1,5 +1,4 @@
-// import { LovCategory } from 'src/lov-category/entities/lov-category.entity';
-import { LovCategory } from 'src/lov-category/entities/lov-category.entity';
+import { ListOfValues } from 'src/list-of-values/entities/list-of-values.entity';
 import { User } from 'src/user/entities/user.entity';
 import { LID_ACTIVE_ID, LID_CREATED_ID } from 'src/utils/constants';
 import {
@@ -10,10 +9,13 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-@Entity({ name: 'list_of_values' })
-export class ListOfValues {
-  @PrimaryGeneratedColumn({ name: 'list_of_values_id' })
-  listOfValuesId: number;
+@Entity({ name: 'organization_history' })
+export class OrganizationHistory {
+  @PrimaryGeneratedColumn({ name: 'organization_history_id' })
+  organizationHistoryId: number;
+
+  @Column({ name: 'organization_id' })
+  organizationId: number;
 
   @Column({ name: 'title' })
   title: string;
@@ -21,19 +23,12 @@ export class ListOfValues {
   @Column({ name: 'description', nullable: true })
   description: string;
 
-  @Column({ name: 'sequence_no', nullable: true })
-  sequenceNo: number;
-
-  @Column({ name: 'css_classes', nullable: true })
-  cssClasses: string;
-
-  @Column({ name: 'css_severity', nullable: true })
-  cssSeverity: string;
-
-  @ManyToOne(() => LovCategory, (LovCategory) => LovCategory.lovCategoryId)
-  @JoinColumn({ name: 'lov_category_id' })
-  @Column({ name: 'lov_category_id' })
-  lovCategoryId: number;
+  @ManyToOne(() => User, (x) => x.userId)
+  @JoinColumn({ name: 'owner_id' })
+  @Column({
+    name: 'owner_id',
+  })
+  ownerId: number;
 
   @ManyToOne(() => ListOfValues, (Lov) => Lov.listOfValuesId)
   @JoinColumn({ name: 'lov_status_id' })

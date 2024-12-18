@@ -9,6 +9,8 @@ import { LovCategoryModule } from './lov-category/lov-category.module';
 import { BankModule } from './bank/bank.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { AccountModule } from './account/account.module';
+import { UserLogModule } from './user-log/user-log.module';
+import { OrganizationModule } from './organization/organization.module';
 
 dotenv.config();
 
@@ -31,6 +33,8 @@ dotenv.config();
     BankModule,
     TransactionModule,
     AccountModule,
+    UserLogModule,
+    OrganizationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
