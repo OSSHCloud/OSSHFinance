@@ -16,6 +16,7 @@ import {
 import { User } from './user.entity';
 import { ListOfValues } from 'src/list-of-values/entities/list-of-values.entity';
 import { Organization } from 'src/organization/entities/organization.entity';
+import { Package } from 'src/package/entities/package.entity';
 
 @Entity({ name: 'user_history' })
 export class UserHistory {
@@ -92,8 +93,8 @@ export class UserHistory {
   @Column({ nullable: true, name: 'lov_gender_type_id' })
   lovGenderTypeId: number;
 
-  // @ManyToOne(() => Package, (x) => x.packageId)
-  // @JoinColumn({ name: 'package_id' })
+  @ManyToOne(() => Package, (x) => x.packageId)
+  @JoinColumn({ name: 'package_id' })
   @Column({ nullable: true, name: 'package_id' })
   packageId: number;
 
