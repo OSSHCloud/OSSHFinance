@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { ListOfValuesModule } from './list-of-values/list-of-values.module';
 import { LovCategoryModule } from './lov-category/lov-category.module';
+import { BankModule } from './bank/bank.module';
+import { TransactionModule } from './transaction/transaction.module';
+import { AccountModule } from './account/account.module';
 
 dotenv.config();
 
@@ -25,6 +28,9 @@ dotenv.config();
     UserModule,
     ListOfValuesModule,
     LovCategoryModule,
+    BankModule,
+    TransactionModule,
+    AccountModule,
   ],
   controllers: [AppController],
   providers: [AppService],
