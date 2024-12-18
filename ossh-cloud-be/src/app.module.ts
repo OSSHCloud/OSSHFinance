@@ -1,9 +1,31 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import * as dotenv from 'dotenv';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module';
+import { ListOfValuesModule } from './list-of-values/list-of-values.module';
+import { LovCategoryModule } from './lov-category/lov-category.module';
+
+dotenv.config();
 
 @Module({
-  imports: [],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USER_NAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      migrations: [__dirname + '/migrations/*{.ts,.js}'],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    UserModule,
+    ListOfValuesModule,
+    LovCategoryModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
