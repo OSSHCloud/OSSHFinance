@@ -11,6 +11,7 @@ import { TransactionModule } from './transaction/transaction.module';
 import { AccountModule } from './account/account.module';
 import { UserLogModule } from './user-log/user-log.module';
 import { OrganizationModule } from './organization/organization.module';
+import { PackageModule } from './package/package.module';
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ dotenv.config();
     AccountModule,
     UserLogModule,
     OrganizationModule,
+    PackageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
