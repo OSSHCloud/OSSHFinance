@@ -22,7 +22,7 @@ import { UserHistory } from './entities/user-history.entity';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDataPayloadDto } from './dto/login.dto';
 import { RestResponse } from 'src/utils/restResponse';
-import { UserLogService } from 'src/user-log/user-log.service';
+// import { UserLogService } from 'src/user-log/user-log.service';
 import { FindAllDataPayloadDto } from './dto/find-all.dto';
 import { paginationDto } from 'src/utils/commonDtos.dto';
 import { isEmpty, isNumber } from 'lodash';
@@ -36,7 +36,7 @@ export class UserService {
     @InjectRepository(UserHistory)
     private readonly historyRepositry: Repository<UserHistory>,
     private jwtService: JwtService,
-    private userLogService: UserLogService,
+    // private userLogService: UserLogService,
   ) {}
 
   // user registration
@@ -364,13 +364,13 @@ export class UserService {
       };
 
       // create user-log record
-      await this.userLogService.create({
-        userId: user.userId,
-        createdAt: formatDate(),
-        dmlUserId: user.userId,
-        dmlStatus: LID_CREATED_ID,
-        dmlTimestamp: formatDate(),
-      });
+      // await this.userLogService.create({
+      //   userId: user.userId,
+      //   createdAt: formatDate(),
+      //   dmlUserId: user.userId,
+      //   dmlStatus: LID_CREATED_ID,
+      //   dmlTimestamp: formatDate(),
+      // });
       return [response];
     } else {
       return RestResponse.notFound(params, UNVERIFIED_EMAIL);

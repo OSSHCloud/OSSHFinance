@@ -9,7 +9,7 @@ import { LovCategoryModule } from './lov-category/lov-category.module';
 import { BankModule } from './bank/bank.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { AccountModule } from './account/account.module';
-import { UserLogModule } from './user-log/user-log.module';
+// import { UserLogModule } from './user-log/user-log.module';
 import { OrganizationModule } from './organization/organization.module';
 import { PackageModule } from './package/package.module';
 
@@ -34,7 +34,7 @@ dotenv.config();
     BankModule,
     TransactionModule,
     AccountModule,
-    UserLogModule,
+    // UserLogModule,
     OrganizationModule,
     PackageModule,
   ],
