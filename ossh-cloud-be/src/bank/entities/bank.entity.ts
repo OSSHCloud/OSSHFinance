@@ -33,19 +33,6 @@ export class Bank {
   @Column({ name: 'country', nullable: true })
   country: number;
 
-  // @ManyToOne(() => LovCategory, (LovCategory) => LovCategory.lovCategoryId)
-  // @JoinColumn({ name: 'lov_category_id' })
-  // @Column({ name: 'lov_category_id' })
-  // lovCategoryId: number;
-
-  // @ManyToOne(() => ListOfValues, (Lov) => Lov.listOfValuesId)
-  // @JoinColumn({ name: 'lov_status_id' })
-  // @Column({
-  //   name: 'lov_status_id',
-  //   default: LID_ACTIVE_ID,
-  // })
-  // lovStatusId: number;
-
   // dml
 
   @ManyToOne(() => ListOfValues, (x) => x.listOfValuesId)
