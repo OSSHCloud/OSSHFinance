@@ -17,7 +17,7 @@ import { ListOfValues } from 'src/list-of-values/entities/list-of-values.entity'
 import { Organization } from 'src/organization/entities/organization.entity';
 import { Package } from 'src/package/entities/package.entity';
 
-@Entity({ name: 'users' })
+@Entity({ name: 'user' })
 export class User {
   @PrimaryGeneratedColumn({ name: 'user_id' })
   userId: number;
