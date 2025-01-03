@@ -9,9 +9,12 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-@Entity({ name: 'country' })
-export class Country {
-  @PrimaryGeneratedColumn({ name: 'country_id' })
+@Entity({ name: 'country_history' })
+export class CountryHistory {
+  @PrimaryGeneratedColumn({ name: 'country_history_id' })
+  countryHistoryId: number;
+
+  @Column({ name: 'country_id' })
   countryId: number;
 
   @Column({ name: 'title' })

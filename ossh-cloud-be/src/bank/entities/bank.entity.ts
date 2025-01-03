@@ -1,4 +1,3 @@
-// import { LovCategory } from 'src/lov-category/entities/lov-category.entity';
 import { Country } from 'src/country/entities/country.entity';
 import { ListOfValues } from 'src/list-of-values/entities/list-of-values.entity';
 import { User } from 'src/user/entities/user.entity';
