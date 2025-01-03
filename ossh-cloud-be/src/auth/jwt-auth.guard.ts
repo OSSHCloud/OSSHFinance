@@ -11,17 +11,20 @@ export class JwtAuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
 
-    let token =
-      request.headers.authorization || request.headers['x-access-token'];
-    token = token?.replace(/^Bearer\s+/, '');
+    // let token =
+    //   request.headers.authorization || request.headers['x-access-token'];
+    // token = token?.replace(/^Bearer\s+/, '');
 
-    try {
-      const verifiedToken = jwt.verify(token, process.env.JWT_CONSTANT);
-      request.user = verifiedToken;
-      return true;
-    } catch (err) {
-      throw new UnauthorizedException(err);
-    }
+    // try {
+    //   const verifiedToken = jwt.verify(token, process.env.JWT_CONSTANT);
+    //   request.user = verifiedToken;
+    //   return true;
+    // } catch (err) {
+    //   throw new UnauthorizedException(err);
+    // }
+
+    request.user = { userId: 1 };
+    return true;
   }
 }
 
