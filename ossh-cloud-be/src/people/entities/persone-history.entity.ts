@@ -1,5 +1,4 @@
 import { ListOfValues } from 'src/list-of-values/entities/list-of-values.entity';
-import { Person } from 'src/people/entities/persone.entity';
 import { User } from 'src/user/entities/user.entity';
 import { LID_CREATED_ID } from 'src/utils/constants';
 import {
@@ -10,36 +9,27 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-@Entity({ name: 'account' })
-export class Account {
-  @PrimaryGeneratedColumn({ name: 'account_id' })
-  accountId: number;
+@Entity({ name: 'person_history' })
+export class PersonHistory {
+  @PrimaryGeneratedColumn({ name: 'person_history_id' })
+  personHistoryId: number;
 
-  @Column({ name: 'title' })
-  title: string;
+  @Column({ name: 'person_id' })
+  personId: number;
+
+  @Column({ name: 'full_name' })
+  fullName: string;
 
   @Column({ name: 'description', nullable: true })
   description: string;
 
-  // @ManyToOne(() => Person, (x) => x.person_id)
-  // @JoinColumn({ name: 'person_id' })
+  @ManyToOne(() => User, (x) => x.userId)
+  @JoinColumn({ name: 'user_id' })
   @Column({
-    name: 'person_id',
+    name: 'user_id',
+    nullable: true,
   })
-  personId: number;
-
-  @ManyToOne(() => Person, (x) => x.personId)
-  @JoinColumn({ name: 'person_id' })
-  @Column({
-    name: 'bank_id',
-  })
-  bankId: number;
-
-  @Column({ name: 'iban', nullable: true })
-  iban: string;
-
-  // @Column({ name: 'description', nullable: true })
-  // description: string;
+  userId: number;
 
   // dml
 
