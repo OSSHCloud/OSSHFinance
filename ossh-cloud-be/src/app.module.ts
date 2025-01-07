@@ -13,6 +13,7 @@ import { AccountModule } from './account/account.module';
 import { OrganizationModule } from './organization/organization.module';
 import { PackageModule } from './package/package.module';
 import { CountryModule } from './country/country.module';
+import { PeopleModule } from './people/people.module';
 
 dotenv.config();
 
@@ -39,6 +40,7 @@ dotenv.config();
     OrganizationModule,
     PackageModule,
     CountryModule,
+    PeopleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
