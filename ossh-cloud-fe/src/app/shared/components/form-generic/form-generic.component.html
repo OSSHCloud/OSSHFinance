@@ -1,0 +1,51 @@
+<div class="{{ formConfig?.formClass }}" [formGroup]="form">
+  <div class="{{ formConfig?.controlsClass }}">
+    <ng-container *ngFor="let control of formConfig?.formControls">
+      <div class="{{ control?.outerClass }}" [ngSwitch]="control?.controlId">
+        <app-input-text
+          *ngSwitchCase="formConstants.CTRL_TEXT_BOX_ID"
+          [controlConfig]="control"
+          [control]="form.get(control.controlName)"
+        ></app-input-text>
+        <app-input-password
+          *ngSwitchCase="formConstants.CTRL_PASSWORD_ID"
+          [controlConfig]="control"
+          [control]="form.get(control.controlName)"
+        >
+        </app-input-password>
+        <app-input-radio
+          *ngSwitchCase="formConstants.CTRL_RADIO_ID"
+          [controlConfig]="control"
+          [control]="form.get(control.controlName)"
+        >
+        </app-input-radio>
+        <app-input-dropdown
+          *ngSwitchCase="formConstants.CTRL_DROP_DOWN_ID"
+          [controlConfig]="control"
+          [control]="form.get(control.controlName)"
+        >
+        </app-input-dropdown>
+      </div>
+    </ng-container>
+  </div>
+  <!-- buttons section -->
+  <div>
+    <ng-container *ngFor="let action of formConfig?.formActions">
+      <ng-container [ngSwitch]="action?.buttonSelector">
+        <app-button
+          *ngSwitchCase="formConstants?.SELECTOR_BUTTON"
+          [buttonConfig]="action"
+          (onClick)="onClick($event)"
+          [disabled]="checkDisabled(action)"
+        ></app-button>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+<!-- <app-input-text></app-input-text>
+  <app-input-text-area></app-input-text-area>
+  <app-input-number></app-input-number>
+  <app-input-switch></app-input-switch>
+  <app-input-autocomplete></app-input-autocomplete>
+  <app-input-date></app-input-date>
+  <app-input-date-time></app-input-date-time> -->

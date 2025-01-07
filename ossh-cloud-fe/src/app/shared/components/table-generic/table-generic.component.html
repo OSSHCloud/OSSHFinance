@@ -1,0 +1,135 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h4">{{ tableConfig.tableTitle }}</h1>
+    <div>
+      <ng-container *ngFor="let action of tableConfig.tableActions">
+        <button
+          pButton
+          [label]="action.actionTitle"
+          class="btn btn-primary"
+          (click)="onClick(action)"
+        ></button>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- [selection]="selectedUsers"
+  (selectionChange)="onSelectionChange($event)" -->
+  <!-- dataKey="email" -->
+
+  <p-table
+    [value]="tableConfig.tableData"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    *ngIf="tableConfig.tableData?.length"
+  >
+    <!-- Table Headers -->
+    <ng-template pTemplate="header">
+      <tr>
+        <!-- <th>
+          <p-checkbox
+            [(ngModel)]="allSelected"
+            [binary]="true"
+            (ngModelChange)="selectAll($event)"
+          ></p-checkbox>
+        </th> -->
+        <th *ngFor="let col of tableConfig.tableColumns">
+          {{ col?.colHeader }}
+        </th>
+        <!-- <th>Role</th>
+        <th>Groups</th>
+        <th>Status</th>-->
+        <th *ngIf="tableConfig?.rowActions?.length">Actions</th>
+      </tr>
+    </ng-template>
+
+    <!-- Table Body -->
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td *ngFor="let col of tableConfig.tableColumns">
+          {{
+            col?.multiplePaths
+              ? getMultiplePathsData(data, col.multiplePaths)
+              : col?.nestedPath
+              ? getNestedPathData(data, col.nestedPath)
+              : data[col.field]
+          }}
+        </td>
+        <td *ngIf="tableConfig?.rowActions?.length">
+          <ng-container *ngFor="let action of tableConfig?.rowActions">
+            <ng-container [ngSwitch]="action?.buttonSelector">
+              <app-button
+                *ngSwitchCase="formConstants?.SELECTOR_BUTTON"
+                [buttonConfig]="action"
+                (onClick)="onClick($event, data)"
+                [disabled]="checkDisabled(action)"
+              ></app-button>
+            </ng-container>
+          </ng-container>
+        </td>
+        <!-- <td>
+          <p-checkbox [(ngModel)]="user.selected" [binary]="true"></p-checkbox>
+        </td> -->
+        <!-- <td>
+          <div class="d-flex align-items-center">
+            <img
+              [src]="user.avatar"
+              alt="Avatar"
+              class="rounded-circle me-2"
+              style="width: 40px; height: 40px"
+            />
+            <div>
+              <div class="fw-bold">{{ user.name }}</div>
+              <div class="text-muted">{{ user.email }}</div>
+            </div>
+          </div>
+        </td> -->
+        <!-- <td>
+          <span class="badge bg-secondary">{{ user.role }}</span>
+        </td> -->
+        <!-- <td>
+          <span
+            *ngFor="let group of user.groups"
+            class="badge bg-light text-dark me-1"
+            >{{ group }}</span
+          >
+        </td> -->
+        <!-- <td>
+          <span
+            [ngClass]="{
+              'badge bg-success': user.status === 'Active',
+              'badge bg-danger': user.status === 'Inactive'
+            }"
+          >
+            {{ user.status }}
+          </span>
+        </td> -->
+        <!-- <td>
+          <button
+            pButton
+            label="Reset Password"
+            class="btn btn-outline-primary btn-sm me-2"
+          ></button>
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="btn btn-outline-danger btn-sm"
+          ></button>
+        </td> -->
+      </tr>
+    </ng-template>
+
+    <!-- Table Footer for Pagination Info -->
+    <!-- <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="6" class="text-end">
+          <small>Showing {{ users.length }} of {{ totalUsers }}</small>
+        </td>
+      </tr>
+    </ng-template> -->
+  </p-table>
+  <app-no-content-found
+    *ngIf="!tableConfig.tableData?.length"
+  ></app-no-content-found>
+</div>

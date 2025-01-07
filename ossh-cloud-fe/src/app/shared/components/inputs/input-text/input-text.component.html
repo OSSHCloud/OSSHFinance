@@ -1,0 +1,12 @@
+<label class="{{ controlConfig?.labelClass }}">{{
+  controlConfig?.fieldLabel
+}}</label>
+<span class="{{ controlConfig?.spanClass }}">
+  <i *ngIf="controlConfig?.showIcon" class="{{ controlConfig?.iconClass }}"></i>
+  <input
+    type="text"
+    pInputText
+    [formControl]="control"
+    class="{{ controlConfig?.fieldClass }}"
+  />
+</span>

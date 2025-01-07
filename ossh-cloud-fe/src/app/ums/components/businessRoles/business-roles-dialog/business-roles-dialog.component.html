@@ -1,0 +1,29 @@
+<app-form-generic
+  *ngIf="renderForm"
+  [formConfig]="formConfig"
+  (onAction)="onAction($event)"
+></app-form-generic>
+<div *ngIf="renderLinkUnlinkForm" class="d-flex flex-column">
+  <div
+    *ngFor="let linked of applicationRolesList[0]"
+    class="d-flex justify-content-between mb-2 bg-secondary align-items-center px-2"
+  >
+    <label for="switch1">{{ linked?.title }}</label>
+    <p-inputSwitch
+      [ngModel]="true"
+      (onChange)="onChange($event, linked)"
+      inputId="switch1"
+    ></p-inputSwitch>
+  </div>
+
+  <div
+    *ngFor="let unLinked of applicationRolesList[1]"
+    class="d-flex justify-content-between mb-2 bg-secondary align-items-center px-2"
+  >
+    <label for="switch1">{{ unLinked?.title }}</label>
+    <p-inputSwitch
+      inputId="switch1"
+      (onChange)="onChange($event, unLinked)"
+    ></p-inputSwitch>
+  </div>
+</div>

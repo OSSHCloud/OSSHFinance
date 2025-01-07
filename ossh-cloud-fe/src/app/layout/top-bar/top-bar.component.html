@@ -1,0 +1,76 @@
+<!-- top-header.component.html -->
+<!-- <div
+  class="d-flex align-items-center justify-content-between bg-dark text-white p-2"
+>
+  <div class="d-flex align-items-center">
+    <img src="logo.png" alt="Logo" class="me-2" height="30" />
+    <h5 class="mb-0">Time Management</h5>
+  </div>
+  <nav>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/attendance">Attendance</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/overtime">Overtime</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/shift-schedule"
+          >Shift Schedule</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/work-time">Work Time</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="d-flex align-items-center">
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-plus"
+      class="p-button-rounded p-button-text text-white me-3"
+    ></button>
+    <i class="pi pi-user text-white fs-4"></i>
+  </div>
+</div> -->
+
+<div class="layout-topbar">
+  <a class="layout-topbar-logo" routerLink="">
+    <img src="assets/layout/images/logo-white.svg" alt="logo" />
+    <span>SAKAI</span>
+  </a>
+
+  <button #menubutton class="p-link layout-menu-button layout-topbar-button">
+    <!-- (click)="layoutService.onMenuToggle()" -->
+    <i class="pi pi-bars"></i>
+  </button>
+
+  <button
+    #topbarmenubutton
+    class="p-link layout-topbar-menu-button layout-topbar-button"
+  >
+    <!-- (click)="layoutService.showProfileSidebar()" -->
+    <i class="pi pi-ellipsis-v"></i>
+  </button>
+
+  <div #topbarmenu class="layout-topbar-menu">
+    <!-- [ngClass]="{
+    'layout-topbar-menu-mobile-active':
+      layoutService.state.profileSidebarVisible
+  }" -->
+    <button class="p-link layout-topbar-button">
+      <i class="pi pi-calendar"></i>
+      <span>Calendar</span>
+    </button>
+    <button class="p-link layout-topbar-button">
+      <i class="pi pi-user"></i>
+      <span>Profile</span>
+    </button>
+    <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
+      <i class="pi pi-cog"></i>
+      <span>Settings</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<!-- <form class="flex flex-column gap-3" [formGroup]="formGroup">
+  <div *ngFor="let category of categories" class="field-checkbox">
+    <p-radioButton
+      [inputId]="category.key"
+      [value]="category"
+      formControlName="selectedCategory"
+    />
+    <label [for]="category.key" class="ml-2">
+      {{ category.name }}
+    </label>
+  </div>
+</form> -->
+
+<label class="{{ controlConfig?.labelClass }}">{{
+  controlConfig?.fieldLabel
+}}</label>
+<div class="grid formgrid">
+  <div *ngFor="let element of controlConfig?.valuesList" class="field-checkbox">
+    <p-radioButton
+      [inputId]="element.key"
+      [value]="element.value"
+      [formControl]="control"
+      class="{{ controlConfig?.fieldClass }}"
+    />
+    <label [for]="element.key" class="ml-2">
+      {{ element.label }}
+    </label>
+  </div>
+</div>
+
+<!-- <span class="{{ controlConfig?.spanClass }}">
+  <i *ngIf="controlConfig?.showIcon" class="{{ controlConfig?.iconClass }}"></i>
+  <input
+    type="text"
+    pInputText
+    [formControl]="control"
+    class="{{ controlConfig?.fieldClass }}"
+  />
+</span> -->
