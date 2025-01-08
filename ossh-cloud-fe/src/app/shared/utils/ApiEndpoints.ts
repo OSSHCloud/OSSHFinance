@@ -38,4 +38,10 @@ export enum API_ENDPOINTS {
   // business application roles routes
   BUSINESS_APPLICATION_ROLES_CREATE = 'business-application-role/create',
   BUSINESS_APPLICATION_ROLES_DELETE = 'business-application-role/delete',
+
+  // organizations routes
+  BANK_CREATE = 'organization/create',
+  BANK_FIND_ALL = 'bank/findAll',
+  BANK_UPDATE = 'organization/update',
+  BANK_DELETE = 'organization/delete',
 }

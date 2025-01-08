@@ -39,29 +39,29 @@ export class BankController {
     }
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // // // @UseGuards(RoleGuard(Role.FullLovCategoryAccess, Role.FindAllLovCategory))
-  // @Post('findAll')
-  // async findAll(@Request() req: any, @Body() findAllDto: FindAllDto) {
-  //   try {
-  //     const res = await Promise.all(
-  //       findAllDto?.data?.map((findPayload) => {
-  //         const standardParams = addStandardParameters(req.user, findPayload);
-  //         return this.mainService.findAll(
-  //           standardParams,
-  //           findAllDto?.pagination,
-  //         );
-  //       }),
-  //     );
-  //     if (!isEmpty(res) && !isEmpty(res[0])) {
-  //       return RestResponse.success(res, API_SUCCESS_MESSAGE);
-  //     } else {
-  //       return RestResponse.notFound(res);
-  //     }
-  //   } catch (e) {
-  //     throw e;
-  //   }
-  // }
+  @UseGuards(JwtAuthGuard)
+  // // @UseGuards(RoleGuard(Role.FullLovCategoryAccess, Role.FindAllLovCategory))
+  @Post('findAll')
+  async findAll(@Request() req: any, @Body() findAllDto: FindAllDto) {
+    try {
+      const res = await Promise.all(
+        findAllDto?.data?.map((findPayload) => {
+          const standardParams = addStandardParameters(req.user, findPayload);
+          return this.mainService.findAll(
+            standardParams,
+            findAllDto?.pagination,
+          );
+        }),
+      );
+      if (!isEmpty(res) && !isEmpty(res[0])) {
+        return RestResponse.success(res, API_SUCCESS_MESSAGE);
+      } else {
+        return RestResponse.notFound(res);
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
 
   // @UseGuards(JwtAuthGuard)
   // // @UseGuards(RoleGuard(Role.FullLovCategoryAccess, Role.UpdateLovCategory))

@@ -12,6 +12,7 @@ import {
 import { RestResponse } from 'src/utils/restResponse';
 import { FindAllDataPayloadDto } from './dto/find-all.dto';
 import { paginationDto } from 'src/utils/commonDtos.dto';
+import { isNumber, isEmpty } from 'lodash';
 
 @Injectable()
 export class BankService {
@@ -47,57 +48,51 @@ export class BankService {
     }
   }
 
-  // async findAll(params: FindAllDataPayloadDto, pagination: paginationDto) {
-  //   let sql = '';
-  //   // Construct SQL query based on provided filter parameters.
-  //   if (isNumber(params?.listOfValuesId)) {
-  //     sql += `r.listOfValuesId=${params?.listOfValuesId} AND `;
-  //   }
-  //   if (!isEmpty(params?.title)) {
-  //     sql += `r.title ilike '%${params?.title}%' AND `;
-  //   }
-  //   if (!isEmpty(params?.description)) {
-  //     sql += `r.description ilike '%${params?.description}%' AND `;
-  //   }
-  //   if (!isEmpty(params?.lovCategoryId)) {
-  //     sql += `r.lovCategoryId=${params?.lovCategoryId} AND `;
-  //   }
-  //   if (!isEmpty(params?.lovStatusId)) {
-  //     sql += `r.lovStatusId=${params?.lovStatusId} AND `;
-  //   }
-  //   if (!isEmpty(params?.sequenceNo)) {
-  //     sql += `r.sequenceNo=${params?.sequenceNo} AND `;
-  //   }
-  //   if (!isEmpty(params?.cssClasses)) {
-  //     sql += `r.cssClasses ilike '%${params?.cssClasses}%' AND `;
-  //   }
-  //   if (!isEmpty(params?.cssSeverity)) {
-  //     sql += `r.cssSeverity ilike '%${params?.cssSeverity}%' AND `;
-  //   }
+  async findAll(params: FindAllDataPayloadDto, pagination: paginationDto) {
+    let sql = '';
+    // Construct SQL query based on provided filter parameters.
+    if (isNumber(params?.bankId)) {
+      sql += `r.bankId=${params?.bankId} AND `;
+    }
+    if (!isEmpty(params?.title)) {
+      sql += `r.title ilike '%${params?.title}%' AND `;
+    }
+    if (!isEmpty(params?.description)) {
+      sql += `r.description ilike '%${params?.description}%' AND `;
+    }
+    if (!isEmpty(params?.code)) {
+      sql += `r.code ilike '%${params?.code}%'  AND `;
+    }
+    if (!isEmpty(params?.ibanCode)) {
+      sql += `r.ibanCode ilike '%${params?.ibanCode}%'  AND `;
+    }
+    if (!isEmpty(params?.countryId)) {
+      sql += `r.countryId=${params?.countryId} AND `;
+    }
 
-  //   sql += `r.dmlStatus != ${LID_DELETE_ID} ORDER BY 1 DESC`;
+    sql += `r.dmlStatus != ${LID_DELETE_ID} ORDER BY 1 DESC`;
 
-  //   // Count the total number of records based on the constructed SQL query.
-  //   const count = await this.mainRepository
-  //     .createQueryBuilder('r')
-  //     .where(sql)
-  //     .getCount();
-  //   // Apply pagination if provided and return the filtered and paginated records.
-  //   if (
-  //     !isEmpty(pagination) &&
-  //     pagination?.pageNo >= 0 &&
-  //     pagination?.itemsPerPage > 0
-  //   ) {
-  //     sql += ` OFFSET ${
-  //       pagination?.pageNo * pagination?.itemsPerPage
-  //     } ROWS FETCH NEXT ${pagination?.itemsPerPage} ROWS ONLY`;
-  //   }
+    // Count the total number of records based on the constructed SQL query.
+    const count = await this.mainRepository
+      .createQueryBuilder('r')
+      .where(sql)
+      .getCount();
+    // Apply pagination if provided and return the filtered and paginated records.
+    if (
+      !isEmpty(pagination) &&
+      pagination?.pageNo >= 0 &&
+      pagination?.itemsPerPage > 0
+    ) {
+      sql += ` OFFSET ${
+        pagination?.pageNo * pagination?.itemsPerPage
+      } ROWS FETCH NEXT ${pagination?.itemsPerPage} ROWS ONLY`;
+    }
 
-  //   const query = count
-  //     ? await this.mainRepository.createQueryBuilder('r').where(sql).getMany()
-  //     : [];
-  //   return count ? [query, count] : [];
-  // }
+    const query = count
+      ? await this.mainRepository.createQueryBuilder('r').where(sql).getMany()
+      : [];
+    return count ? [query, count] : [];
+  }
 
   // async findOne(params: FindOneDataPayloadDto) {
   //   const res = await this.mainRepository.findOne({

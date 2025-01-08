@@ -21,6 +21,12 @@ const routes: Routes = [
     path: 'ums',
     loadChildren: () => import('./ums/ums.module').then((m) => m.UmsModule),
   },
+  {
+    canActivate: [AuthGuard],
+    path: 'finance',
+    loadChildren: () =>
+      import('./finance/finance.module').then((m) => m.FinanceModule),
+  },
 ];
 
 @NgModule({

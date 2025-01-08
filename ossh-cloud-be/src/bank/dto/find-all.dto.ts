@@ -32,7 +32,7 @@ export class FindAllDataPayloadDto {
 
   @IsOptional()
   @IsNumber()
-  country: number;
+  countryId: number;
 }
 
 export class FindAllDto {

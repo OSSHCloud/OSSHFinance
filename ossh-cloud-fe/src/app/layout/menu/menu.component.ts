@@ -62,6 +62,51 @@ export class MenuComponent {
           },
         ],
       },
+      {
+        label: 'Finance',
+        icon: 'pi pi-fw pi-user-edit',
+        items: [
+          {
+            label: 'Banks',
+            icon: 'pi pi-fw pi-user',
+            command: () => this.navigateTo(FE_URLS.BANKS),
+            // items: [
+            //   {
+            //     label: 'Bookmark',
+            //     icon: 'pi pi-fw pi-bookmark',
+            //   },
+            //   {
+            //     label: 'Video',
+            //     icon: 'pi pi-fw pi-video',
+            //   },
+            // ],
+          },
+          {
+            label: 'Accounts',
+            icon: 'pi pi-fw pi-sitemap',
+            command: () => this.navigateTo(FE_URLS.ACCOUNTS),
+          },
+          // {
+          //   label: 'Applications',
+          //   icon: 'pi pi-fw pi-qrcode',
+          //   command: () => this.navigateTo(FE_URLS.APPLICATIONS),
+          // },
+          // {
+          //   label: 'Application Roles',
+          //   icon: 'pi pi-fw pi-sitemap',
+          //   command: () => this.navigateTo(FE_URLS.APPLICATION_ROLES),
+          // },
+          // {
+          //   label: 'Business Roles',
+          //   icon: 'pi pi-fw pi-sitemap',
+          //   command: () => this.navigateTo(FE_URLS.BUSINESS_ROLES),
+          // },
+          // {
+          //   label: 'Packages',
+          //   icon: 'pi pi-fw pi-wallet',
+          // },
+        ],
+      },
       // {
       //   label: 'Edit',
       //   icon: 'pi pi-fw pi-pencil',

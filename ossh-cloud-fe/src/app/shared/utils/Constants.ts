@@ -8,6 +8,9 @@ export enum FE_URLS {
   APPLICATIONS = 'ums/applications',
   APPLICATION_ROLES = 'ums/application-roles',
   BUSINESS_ROLES = 'ums/business-roles',
+
+  BANKS = 'finance/banks',
+  ACCOUNTS = 'finance/accounts',
 }
 
 export class UTS {
