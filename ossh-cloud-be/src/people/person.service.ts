@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { isNumber, isEmpty } from 'lodash';
 import { Not, Repository } from 'typeorm';
-import { Account } from './entities/account.entity';
-import { AccountHistory } from './entities/account-history.entity';
+import { Person } from './entities/person.entity';
+import { PersonHistory } from './entities/person-history.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateDataPayloadDto } from './dto/create.dto';
 import {
   LID_DELETE_ID,
@@ -10,32 +11,31 @@ import {
   TRY_AGAIN_LATER,
 } from 'src/utils/constants';
 import { RestResponse } from 'src/utils/restResponse';
-import { isNumber, isEmpty } from 'lodash';
 import { FindAllDataPayloadDto } from './dto/find-all.dto';
 import { paginationDto } from 'src/utils/commonDtos.dto';
 
 @Injectable()
-export class AccountService {
+export class PersonService {
   constructor(
-    @InjectRepository(Account)
-    private readonly mainRepository: Repository<Account>,
-    @InjectRepository(AccountHistory)
-    private readonly historyRepositry: Repository<AccountHistory>,
+    @InjectRepository(Person)
+    private readonly mainRepository: Repository<Person>,
+    @InjectRepository(PersonHistory)
+    private readonly historyRepositry: Repository<PersonHistory>,
   ) {}
 
   async create(params: CreateDataPayloadDto) {
     // check if record exists
-    const ifRecordExists = await this.mainRepository.findOne({
-      where: [
-        {
-          iban: params.iban,
-          dmlStatus: Not(LID_DELETE_ID),
-        },
-      ],
-    });
-    if (ifRecordExists) {
-      return RestResponse.notFound(params, RECORD_EXISTS);
-    }
+    // const ifRecordExists = await this.mainRepository.findOne({
+    //   where: [
+    //     {
+    //       title: params.title,
+    //       dmlStatus: Not(LID_DELETE_ID),
+    //     },
+    //   ],
+    // });
+    // if (ifRecordExists) {
+    //   return RestResponse.notFound(params, RECORD_EXISTS);
+    // }
     // create a new record
     const res = await this.mainRepository.save({ ...params });
     // create history record
@@ -51,26 +51,32 @@ export class AccountService {
   async findAll(params: FindAllDataPayloadDto, pagination: paginationDto) {
     let sql = '';
     // Construct SQL query based on provided filter parameters.
-    if (isNumber(params?.accountId)) {
-      sql += `r.accountId=${params?.accountId} AND `;
-    }
-    if (!isEmpty(params?.title)) {
-      sql += `r.title ilike '%${params?.title}%' AND `;
-    }
-    if (!isEmpty(params?.description)) {
-      sql += `r.description ilike '%${params?.description}%' AND `;
-    }
-    if (!isEmpty(params?.personId)) {
+    if (isNumber(params?.personId)) {
       sql += `r.personId=${params?.personId} AND `;
     }
-    if (!isEmpty(params?.bankId)) {
-      sql += `r.bankId=${params?.bankId} AND `;
+    if (!isEmpty(params?.firstName)) {
+      sql += `r.firstName ilike '%${params?.firstName}%' AND `;
     }
-    if (!isEmpty(params?.iban)) {
-      sql += `r.iban=${params?.iban} AND `;
+    if (!isEmpty(params?.middleName)) {
+      sql += `r.middleName ilike '%${params?.middleName}%' AND `;
     }
+    if (!isEmpty(params?.lastName)) {
+      sql += `r.lastName ilike '%${params?.lastName}%' AND `;
+    }
+    if (!isEmpty(params?.dateOfBirth)) {
+      sql += `r.dateOfBirth ilike '%${params?.dateOfBirth}%'  AND `;
+    }
+    if (!isEmpty(params?.lovGenderTypeId)) {
+      sql += `r.lovGenderTypeId=${params?.lovGenderTypeId} AND `;
+    }
+    // if (!isEmpty(params?.userId)) {
+    //   sql += `r.userId=${params?.userId} AND `;
+    // }
+    // if (!isEmpty(params?.createdById)) {
+    //   sql += `r.createdById=${params?.createdById} AND `;
+    // }
 
-    sql += `r.dmlStatus != ${LID_DELETE_ID} ORDER BY 1 DESC`;
+    sql += `r.createdById=${params?.['dmlUserId']} AND r.dmlStatus != ${LID_DELETE_ID} ORDER BY 1 ASC`;
 
     // Count the total number of records based on the constructed SQL query.
     const count = await this.mainRepository
@@ -89,12 +95,7 @@ export class AccountService {
     }
 
     const query = count
-      ? await this.mainRepository
-          .createQueryBuilder('r')
-          .where(sql)
-          .leftJoinAndSelect('r.bankId', 'bankId')
-          .leftJoinAndSelect('r.personId', 'personId')
-          .getMany()
+      ? await this.mainRepository.createQueryBuilder('r').where(sql).getMany()
       : [];
     return count ? [query, count] : [];
   }

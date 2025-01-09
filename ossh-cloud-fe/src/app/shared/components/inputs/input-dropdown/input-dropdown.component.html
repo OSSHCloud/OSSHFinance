@@ -5,6 +5,7 @@
   <i *ngIf="controlConfig?.showIcon" class="{{ controlConfig?.iconClass }}"></i>
   <p-dropdown
     [formControl]="control"
+    appendTo="body"
     class="{{ controlConfig?.fieldClass }}"
     [options]="controlConfig.valuesList"
     optionLabel="{{ controlConfig.dropDownLabel }}"

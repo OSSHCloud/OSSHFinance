@@ -14,11 +14,25 @@ export class Person {
   @PrimaryGeneratedColumn({ name: 'person_id' })
   personId: number;
 
-  @Column({ name: 'full_name' })
-  fullName: string;
+  @Column({ name: 'first_name' })
+  firstName: string;
 
-  @Column({ name: 'description', nullable: true })
-  description: string;
+  @Column({ name: 'middle_name', nullable: true })
+  middleName?: string;
+
+  @Column({ name: 'last_name', nullable: false })
+  lastName: string;
+
+  @Column({ name: 'profile_image', nullable: true })
+  profileImage?: string;
+
+  @Column({ type: 'date', name: 'date_of_birth', nullable: true })
+  dateOfBirth?: string;
+
+  @ManyToOne(() => ListOfValues, (x) => x.listOfValuesId)
+  @JoinColumn({ name: 'lov_gender_type_id' })
+  @Column({ nullable: true, name: 'lov_gender_type_id' })
+  lovGenderTypeId?: number;
 
   @ManyToOne(() => User, (x) => x.userId)
   @JoinColumn({ name: 'user_id' })
@@ -27,6 +41,14 @@ export class Person {
     nullable: true,
   })
   userId: number;
+
+  @ManyToOne(() => User, (x) => x.userId)
+  @JoinColumn({ name: 'created_by_id' })
+  @Column({
+    name: 'created_by_id',
+    nullable: true,
+  })
+  createdById: number;
 
   // dml
 

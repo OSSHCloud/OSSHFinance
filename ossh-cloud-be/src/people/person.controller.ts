@@ -1,14 +1,5 @@
-import {
-  Controller,
-  Request,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  UseGuards,
-} from '@nestjs/common';
-import { AccountService } from './account.service';
+import { Controller, Request, Post, Body, UseGuards } from '@nestjs/common';
+import { PersonService } from './person.service';
 import JwtAuthGuard from 'src/auth/jwt-auth.guard';
 import { CreateDto } from './dto/create.dto';
 import { addStandardParameters } from 'src/utils/commonFunctions';
@@ -18,9 +9,9 @@ import * as dayjs from 'dayjs';
 import { RestResponse } from 'src/utils/restResponse';
 import { FindAllDto } from './dto/find-all.dto';
 
-@Controller('account')
-export class AccountController {
-  constructor(private readonly mainService: AccountService) {}
+@Controller('person')
+export class PersonController {
+  constructor(private readonly mainService: PersonService) {}
 
   @UseGuards(JwtAuthGuard)
   // @UseGuards(RoleGuard(Role.FullLovCategoryAccess, Role.AddLovCategory))
@@ -32,6 +23,7 @@ export class AccountController {
           const standardParams = addStandardParameters(req.user, createPayload);
           return this.mainService.create({
             ...standardParams,
+            createdById: standardParams.dmlUserId,
             dmlStatus: LID_CREATED_ID,
             dmlTimestamp: dayjs().format(),
           });

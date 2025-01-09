@@ -1,1 +1,5 @@
-<p>accounts-dialog works!</p>
+<app-form-generic
+  *ngIf="renderForm"
+  [formConfig]="formConfig"
+  (onAction)="onAction($event)"
+></app-form-generic>

@@ -28,7 +28,7 @@ export class BankDialogComponent {
 
   getAllOrganizations() {
     this.subscription = this.apiService
-      .call({}, {}, API_ENDPOINTS.Country_FIND_ALL, false)
+      .call({}, {}, API_ENDPOINTS.COUNTRY_FIND_ALL, false)
       .subscribe((resp: any) => {
         if (resp.statusCode === API_STATUS_CODE.OK) {
           this.countriesList = ApiResponse.getData(resp);

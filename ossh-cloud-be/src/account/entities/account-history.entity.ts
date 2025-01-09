@@ -1,5 +1,5 @@
 import { ListOfValues } from 'src/list-of-values/entities/list-of-values.entity';
-import { Person } from 'src/people/entities/persone.entity';
+import { Person } from 'src/people/entities/person.entity';
 import { User } from 'src/user/entities/user.entity';
 import { LID_CREATED_ID } from 'src/utils/constants';
 import {
