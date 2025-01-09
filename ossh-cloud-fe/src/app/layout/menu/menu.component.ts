@@ -86,11 +86,11 @@ export class MenuComponent {
             icon: 'pi pi-fw pi-sitemap',
             command: () => this.navigateTo(FE_URLS.ACCOUNTS),
           },
-          // {
-          //   label: 'Applications',
-          //   icon: 'pi pi-fw pi-qrcode',
-          //   command: () => this.navigateTo(FE_URLS.APPLICATIONS),
-          // },
+          {
+            label: 'Transactions',
+            icon: 'pi pi-fw pi-qrcode',
+            command: () => this.navigateTo(FE_URLS.TRANSACTIONS),
+          },
           // {
           //   label: 'Application Roles',
           //   icon: 'pi pi-fw pi-sitemap',

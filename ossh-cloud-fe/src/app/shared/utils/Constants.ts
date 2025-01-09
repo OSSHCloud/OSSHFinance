@@ -11,6 +11,7 @@ export enum FE_URLS {
 
   BANKS = 'finance/banks',
   ACCOUNTS = 'finance/accounts',
+  TRANSACTIONS = 'finance/transactions',
 }
 
 export class UTS {

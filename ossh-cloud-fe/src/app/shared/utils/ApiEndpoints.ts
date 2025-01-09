@@ -62,4 +62,10 @@ export enum API_ENDPOINTS {
   ACCOUNT_FIND_ALL = 'account/findAll',
   ACCOUNT_UPDATE = 'account/update',
   ACCOUNT_DELETE = 'account/delete',
+
+  // account routes
+  TRANSACTION_CREATE = 'transaction/create',
+  TRANSACTION_FIND_ALL = 'transaction/findAll',
+  TRANSACTION_UPDATE = 'transaction/update',
+  TRANSACTION_DELETE = 'transaction/delete',
 }

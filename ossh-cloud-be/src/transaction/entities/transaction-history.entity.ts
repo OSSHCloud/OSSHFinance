@@ -20,12 +20,12 @@ export class TransactionHistory {
   transactionId: number;
 
   @ManyToOne(() => Account, (x) => x.accountId)
-  @JoinColumn({ name: 'lov_category_id' })
+  @JoinColumn({ name: 'from_account' })
   @Column({ name: 'from_account', nullable: true })
   fromAccountId: number;
 
   @ManyToOne(() => Account, (x) => x.accountId)
-  @JoinColumn({ name: 'lov_category_id' })
+  @JoinColumn({ name: 'to_account' })
   @Column({ name: 'to_account', nullable: true })
   toAccountId: number;
 
