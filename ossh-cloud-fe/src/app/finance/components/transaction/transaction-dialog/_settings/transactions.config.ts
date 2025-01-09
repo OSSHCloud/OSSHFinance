@@ -186,7 +186,7 @@ export const TRANSACTIONS_FORM_CONFIG = {
         controlNames.taxCharges,
         controlNames.totalAmount,
       ],
-      actionUrl: API_ENDPOINTS.ACCOUNT_CREATE,
+      actionUrl: API_ENDPOINTS.TRANSACTION_CREATE,
       showToast: true,
     },
   ],
