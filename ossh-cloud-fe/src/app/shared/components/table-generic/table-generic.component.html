@@ -19,9 +19,9 @@
 
   <p-table
     [value]="tableConfig.tableData"
-    [paginator]="true"
-    [rows]="10"
-    [rowsPerPageOptions]="[5, 10, 20]"
+    [paginator]="(tableConfig.pagination?.totalCount ?? 0) > 10"
+    [rows]="tableConfig.pagination?.pageNo ?? 10"
+    [rowsPerPageOptions]="tableConfig.pagination?.pagingOption ?? [10, 20, 50]"
     *ngIf="tableConfig.tableData?.length"
   >
     <!-- Table Headers -->
@@ -34,20 +34,22 @@
             (ngModelChange)="selectAll($event)"
           ></p-checkbox>
         </th> -->
-        <th *ngFor="let col of tableConfig.tableColumns">
+        <th *ngFor="let col of tableConfig.tableColumns" class="text-center">
           {{ col?.colHeader }}
         </th>
         <!-- <th>Role</th>
         <th>Groups</th>
         <th>Status</th>-->
-        <th *ngIf="tableConfig?.rowActions?.length">Actions</th>
+        <th *ngIf="tableConfig?.rowActions?.length" class="text-center">
+          Actions
+        </th>
       </tr>
     </ng-template>
 
     <!-- Table Body -->
     <ng-template pTemplate="body" let-data>
       <tr>
-        <td *ngFor="let col of tableConfig.tableColumns">
+        <td *ngFor="let col of tableConfig.tableColumns" class="text-center">
           {{
             col?.multiplePaths
               ? getMultiplePathsData(data, col.multiplePaths)
@@ -56,7 +58,7 @@
               : data[col.field]
           }}
         </td>
-        <td *ngIf="tableConfig?.rowActions?.length">
+        <td *ngIf="tableConfig?.rowActions?.length" class="text-center">
           <ng-container *ngFor="let action of tableConfig?.rowActions">
             <ng-container [ngSwitch]="action?.buttonSelector">
               <app-button

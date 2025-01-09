@@ -70,7 +70,7 @@ export class BankService {
       sql += `r.countryId=${params?.countryId} AND `;
     }
 
-    sql += `r.dmlStatus != ${LID_DELETE_ID} ORDER BY 1 DESC`;
+    sql += `r.dmlStatus != ${LID_DELETE_ID} ORDER BY 1 ASC`;
 
     // Count the total number of records based on the constructed SQL query.
     const count = await this.mainRepository
@@ -89,7 +89,11 @@ export class BankService {
     }
 
     const query = count
-      ? await this.mainRepository.createQueryBuilder('r').where(sql).getMany()
+      ? await this.mainRepository
+          .createQueryBuilder('r')
+          .where(sql)
+          .leftJoinAndSelect('r.countryId', 'countryId')
+          .getMany()
       : [];
     return count ? [query, count] : [];
   }

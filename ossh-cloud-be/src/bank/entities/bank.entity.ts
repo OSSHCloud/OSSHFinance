@@ -27,10 +27,10 @@ export class Bank {
   @Column({ name: 'iban_code', nullable: true })
   ibanCode: string;
 
-  // @ManyToOne(() => Country, (x) => x.countryId)
-  // @JoinColumn({ name: 'country' })
-  @Column({ name: 'country', nullable: true })
-  country: number;
+  @ManyToOne(() => Country, (x) => x.countryId)
+  @JoinColumn({ name: 'country_id' })
+  @Column({ name: 'country_id', nullable: true })
+  countryId: number;
 
   // dml
 

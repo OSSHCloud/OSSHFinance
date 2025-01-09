@@ -20,11 +20,7 @@ export class ApplicationsDialogComponent implements OnInit, OnDestroy {
   formConfig: FormConfig = new FormConfig();
   renderForm: boolean = false;
 
-  // private alertService: AlertService
-  // private loginService: LoginService,
-  constructor(private apiService: ApiService, private ref: DynamicDialogRef) {
-    // this.formConfig = new FormConfig(APPLICATION_FORM_CONFIG);
-  }
+  constructor(private apiService: ApiService, private ref: DynamicDialogRef) {}
 
   ngOnInit() {
     this.getAllOrganizations();

@@ -40,7 +40,13 @@ export enum API_ENDPOINTS {
   BUSINESS_APPLICATION_ROLES_DELETE = 'business-application-role/delete',
 
   // organizations routes
-  BANK_CREATE = 'organization/create',
+  Country_FIND_ALL = 'country/findAll',
+  Country_UPDATE = 'country/update',
+  Country_DELETE = 'country/delete',
+  Country_CREATE = 'country/create',
+
+  // organizations routes
+  BANK_CREATE = 'bank/create',
   BANK_FIND_ALL = 'bank/findAll',
   BANK_UPDATE = 'organization/update',
   BANK_DELETE = 'organization/delete',

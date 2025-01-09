@@ -11,19 +11,19 @@ import {
 const moduleName = 'Banks';
 
 export enum colHeaders {
-  name = 'Name',
-  username = 'Username',
-  role = 'Role',
-  package = 'Package',
-  status = 'Status',
+  title = 'Title',
+  description = 'Description',
+  ibanCode = 'Iban Code',
+  country = 'Country',
+  bankCode = 'Bank Code',
 }
 
 export enum fieldNames {
-  name = 'name',
-  username = 'username',
-  role = 'lovUserTypeId',
-  package = 'packageId',
-  status = 'lovStatusId',
+  title = 'title',
+  description = 'description',
+  ibanCode = 'ibanCode',
+  country = 'countryId',
+  bankCode = 'code',
 
   firstName = 'firstName',
   middleName = 'middleName',
@@ -36,47 +36,47 @@ export const BANKS_TABLE_CONFIG = {
   // endPoint?: string,
   tableColumns: [
     {
-      field: fieldNames.name,
-      colHeader: colHeaders.name,
-      multiplePaths: [
-        fieldNames.firstName,
-        fieldNames.middleName,
-        fieldNames.lastName,
-      ],
+      field: fieldNames.title,
+      colHeader: colHeaders.title,
+      // multiplePaths: [
+      //   fieldNames.firstName,
+      //   fieldNames.middleName,
+      //   fieldNames.lastName,
+      // ],
       eventAction: false,
       showBadge: false,
       class: 'string',
       // pipe?: string;
     },
     {
-      field: fieldNames.username,
-      colHeader: colHeaders.username,
+      field: fieldNames.description,
+      colHeader: colHeaders.description,
       eventAction: false,
       showBadge: false,
       class: 'string',
       // pipe?: string;
     },
     {
-      field: fieldNames.package,
-      colHeader: colHeaders.package,
+      field: fieldNames.bankCode,
+      colHeader: colHeaders.bankCode,
+      // nestedPath: 'lovStatusId.title',
       eventAction: false,
       showBadge: false,
       class: 'string',
       // pipe?: string;
     },
     {
-      field: fieldNames.role,
-      colHeader: colHeaders.role,
-      nestedPath: 'lovUserTypeId.title',
+      field: fieldNames.ibanCode,
+      colHeader: colHeaders.ibanCode,
       eventAction: false,
       showBadge: false,
       class: 'string',
       // pipe?: string;
     },
     {
-      field: fieldNames.status,
-      colHeader: colHeaders.status,
-      nestedPath: 'lovStatusId.title',
+      field: fieldNames.country,
+      colHeader: colHeaders.country,
+      nestedPath: 'countryId.title',
       eventAction: false,
       showBadge: false,
       class: 'string',
@@ -86,8 +86,8 @@ export const BANKS_TABLE_CONFIG = {
   tableActions: [
     {
       actionName: ACTIONS.ADD,
-      actionTitle: 'Add User',
-      actionUrl: API_ENDPOINTS.USER_CREATE,
+      actionTitle: 'Add Bank',
+      actionUrl: API_ENDPOINTS.BANK_CREATE,
       // visibleInActionMenu: true,
       showToast: true,
     },

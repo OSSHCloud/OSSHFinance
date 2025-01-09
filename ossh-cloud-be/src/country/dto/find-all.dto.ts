@@ -12,7 +12,7 @@ import { paginationDto } from 'src/utils/commonDtos.dto';
 export class FindAllDataPayloadDto {
   @IsOptional()
   @IsNumber()
-  bankId: number;
+  countryId: number;
 
   @IsOptional()
   @IsString()
@@ -23,16 +23,16 @@ export class FindAllDataPayloadDto {
   description: string;
 
   @IsOptional()
-  @IsString()
-  code: string;
-
-  @IsOptional()
-  @IsString()
-  ibanCode: string;
-
-  @IsOptional()
   @IsNumber()
-  country: number;
+  phoneCode: number;
+
+  @IsOptional()
+  @IsString()
+  iso2Code: string;
+
+  @IsOptional()
+  @IsString()
+  iso3Code: string;
 }
 
 export class FindAllDto {
