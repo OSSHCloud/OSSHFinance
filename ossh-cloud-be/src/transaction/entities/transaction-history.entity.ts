@@ -11,9 +11,12 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-@Entity({ name: 'transaction' })
-export class Transaction {
-  @PrimaryGeneratedColumn({ name: 'transaction_id' })
+@Entity({ name: 'transaction_history' })
+export class TransactionHistory {
+  @PrimaryGeneratedColumn({ name: 'transaction_history_id' })
+  transactionHistoryId: number;
+
+  @Column({ name: 'transaction_id' })
   transactionId: number;
 
   @ManyToOne(() => Account, (x) => x.accountId)
